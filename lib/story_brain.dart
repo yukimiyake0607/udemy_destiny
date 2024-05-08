@@ -1,7 +1,7 @@
 import 'story.dart';
 
 class StoryBrain {
-  int storyNumber = 0;
+  int _storyNumber = 0;
 
   List<Story> _storyData = [
     Story(
@@ -36,51 +36,63 @@ class StoryBrain {
   ];
 
   String getStory() {
-    return _storyData[storyNumber].storyTitle;
+    return _storyData[_storyNumber].storyTitle;
   }
 
   String getChoice1() {
-    return _storyData[storyNumber].choice1;
+    return _storyData[_storyNumber].choice1;
   }
 
   String getChoice2() {
-    return _storyData[storyNumber].choice2;
+    return _storyData[_storyNumber].choice2;
   }
 
   void nextStory(int userChoice) {
-    if (userChoice == 1 && storyNumber == 0) {
-      storyNumber = 2;
-    } else if (userChoice == 2 && storyNumber == 0) {
-      storyNumber = 1;
-    } else if (userChoice == 1 && storyNumber == 1) {
-      storyNumber = 2;
-    } else if (userChoice == 2 && storyNumber == 1) {
-      storyNumber = 3;
-    } else if (userChoice == 1 && storyNumber == 2) {
-      storyNumber = 5;
-    } else if (userChoice == 2 && storyNumber == 2) {
-      storyNumber = 4;
+    if (userChoice == 1 && _storyNumber == 0) {
+      _storyNumber = 2;
+    } else if (userChoice == 2 && _storyNumber == 0) {
+      _storyNumber = 1;
+    } else if (userChoice == 1 && _storyNumber == 1) {
+      _storyNumber = 2;
+    } else if (userChoice == 2 && _storyNumber == 1) {
+      _storyNumber = 3;
+    } else if (userChoice == 1 && _storyNumber == 2) {
+      _storyNumber = 5;
+    } else if (userChoice == 2 && _storyNumber == 2) {
+      _storyNumber = 4;
     } else if (userChoice == 1 ||
         userChoice == 2 ||
-        storyNumber == 3 ||
-        storyNumber == 4 ||
-        storyNumber == 5) {
-      storyNumber = 0;
+        _storyNumber == 3 ||
+        _storyNumber == 4 ||
+        _storyNumber == 5) {
+      restart();
+    }
+  }
+
+  void restart() {
+    _storyNumber = 0;
+  }
+
+  bool buttonShouldBeVisible() {
+    if (_storyNumber == 0 || _storyNumber == 1 || _storyNumber == 2) {
+      return true;
+    } else {
+      return false;
     }
   }
 }
 
 
 
-//TODO: Step 23 - Use the storyNumber property inside getStory(), getChoice1() and getChoice2() so that it gets the updated story and choices rather than always just the first (0th) one.
+//TODO: Step 23 - Use the _storyNumber property inside getStory(), getChoice1() and getChoice2() so that it gets the updated story and choices rather than always just the first (0th) one.
 
 
 
-//TODO: Step 25 - Change the storyNumber property into a private property so that only story_brain.dart has access to it. You can do this by right clicking on the name (storyNumber) and selecting Refactor -> Rename to make the change across all the places where it's used.
+//TODO: Step 25 - Change the _storyNumber property into a private property so that only story_brain.dart has access to it. You can do this by right clicking on the name (_storyNumber) and selecting Refactor -> Rename to make the change across all the places where it's used.
 
 
-//TODO: Step 21 - Using the story plan, update nextStory() to change the storyNumber depending on the choice made by the user. e.g. if choiceNumber was equal to 1 and the storyNumber is 0, the storyNumber should become 2.
+//TODO: Step 21 - Using the story plan, update nextStory() to change the _storyNumber depending on the choice made by the user. e.g. if choiceNumber was equal to 1 and the _storyNumber is 0, the _storyNumber should become 2.
 
-//TODO: Step 22 - In nextStory() if the storyNumber is equal to 3 or 4 or 5, that means it's the end of the game and it should call a method called restart() that resets the storyNumber to 0.
+//TODO: Step 22 - In nextStory() if the _storyNumber is equal to 3 or 4 or 5, that means it's the end of the game and it should call a method called restart() that resets the _storyNumber to 0.
 
-//TODO: Step 27 - Create a method called buttonShouldBeVisible() which checks to see if storyNumber is 0 or 1 or 2 (when both buttons should show choices) and return true if that is the case, else it should return false.
+//TODO: Step 27 - Create a method called buttonShouldBeVisible() which checks to see if _storyNumber is 0 or 1 or 2 (when both buttons should show choices) and return true if that is the case, else it should return false.
