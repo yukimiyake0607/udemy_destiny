@@ -19,7 +19,6 @@ class StoryPage extends StatefulWidget {
 }
 
 class _StoryPageState extends State<StoryPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,17 +46,19 @@ class _StoryPageState extends State<StoryPage> {
               ),
               Expanded(
                 flex: 2,
-                child: TextButton(
-                  onPressed: () {
-                    //Choice 1 made by user.
-                    setState(() {
-                      storyBrain.nextStory(1);
-                    });
-                  },
-                  style: TextButton.styleFrom(backgroundColor: Colors.red),
-                  child: Text(
-                    storyBrain.getChoice1(),
-                    style: TextStyle(fontSize: 20.0, color: Colors.white),
+                child: Visibility(
+                  child: TextButton(
+                    onPressed: () {
+                      //Choice 1 made by user.
+                      setState(() {
+                        storyBrain.nextStory(1);
+                      });
+                    },
+                    style: TextButton.styleFrom(backgroundColor: Colors.red),
+                    child: Text(
+                      storyBrain.getChoice1(),
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
                   ),
                 ),
               ),
@@ -68,18 +69,21 @@ class _StoryPageState extends State<StoryPage> {
                 flex: 2,
                 //TODO: Step 26 - Use a Flutter Visibility Widget to wrap this FlatButton.
                 //TODO: Step 28 - Set the "visible" property of the Visibility Widget to equal the output from the buttonShouldBeVisible() method in the storyBrain.
-                child: TextButton(
-                  onPressed: () {
-                    //Choice 2 made by user.
-                    setState(() {
-                      storyBrain.nextStory(2);
-                      print('object');
-                    });
-                  },
-                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
-                  child: Text(
-                    storyBrain.getChoice2(),
-                    style: TextStyle(fontSize: 20.0, color: Colors.white),
+                child: Visibility(
+                  visible: storyBrain.buttonShouldBeVisible(),
+                  child: TextButton(
+                    onPressed: () {
+                      //Choice 2 made by user.
+                      setState(() {
+                        storyBrain.nextStory(2);
+                        print('object');
+                      });
+                    },
+                    style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                    child: Text(
+                      storyBrain.getChoice2(),
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
                   ),
                 ),
               ),
